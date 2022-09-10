@@ -2,27 +2,27 @@ import actionTypes from "../../constants/actionTypes";
 
 const initialState = {
     isLoading: false,
-    users: null,
+    employee: null,
     errorMessage: null,
 }
 
-const usersReducer = (state = initialState, {type , payload}) => {
+const employeeReducer = (state = initialState, {type , payload}) => {
     switch(type){
-        case actionTypes.USERS_LOAD_START:
+        case actionTypes.EMPLOYEE_LOAD_START:
             return{
                 ...state,
                 isLoading: true,
-                users: null,
+                employee: null,
                 errorMessage: null,
             };
-            case actionTypes.USERS_LOAD_SUCCESS:
+            case actionTypes.EMPLOYEE_LOAD_SUCCESS:
                 return{
                     ...state,
                     isLoading:false,
-                    users:payload,
+                    employee:payload,
                     errorMessage:null,
                 };
-                case actionTypes.USERS_LOAD_ERROR:
+                case actionTypes.EMPLOYEE_LOAD_ERROR:
                     return{
                         ...state,
                         isLoading:false,
@@ -32,4 +32,4 @@ const usersReducer = (state = initialState, {type , payload}) => {
                         return state;
     }
 };
-export default usersReducer;
+export default employeeReducer;

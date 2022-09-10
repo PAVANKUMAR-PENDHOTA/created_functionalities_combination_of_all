@@ -1,31 +1,43 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { loadUsersAsync } from "./redux/modules/reducers/thunk";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Employees from "./components/Employees";
+// import AddEmployees from "./components/AddEmployees";
+import AddEdit from "./components/AddEdit";
+
+
+import Box from "@mui/material/Box";
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+// import EditEmployees from "./components/EditEmployees";
+
 
 function App() {
-
- 
-    const dispatch = useDispatch();
-    const {isLoading, users, errorMessage} = useSelector((state)=> state.users);
-    // eslint-disable-next-line no-undef
-    console.log(users);
-    useEffect(()=>{
-      dispatch(loadUsersAsync());
-    },[])
   return (
     <div>
+      <Box sx={{ width: "100%" }}>
+        <Router>
 
-        <h1>Users Listing1</h1>
+        <Typography variant="h3"  display="block" color="secondary" sx={{textAlign:"center"}}>
+      New employee Details
+      </Typography>
 
-        {isLoading && <h4>Loading...</h4>}
-        
-        {users && users.map((user)=><h4 key={user.id}>{user.name}</h4>)}
+        <Stack direction="row" mb="10px" spacing={2} component="h2" sx={{textDecoration:"none"}}>
+          <Link to="/">Home</Link>
+          <Link to="/addedit">Add</Link>
+          {/* <Link to="/edit">Edit</Link> */}
 
-        {errorMessage && <h3>{errorMessage}</h3>}
+          </Stack>
 
-
+          <Routes>
+            <Route exact path="/" element={<Employees />}></Route>
+            <Route exact path="/addedit" element={<AddEdit />}></Route>
+            <Route exact path="/update/:id" element={<AddEdit />}></Route>
+            {/* <Route exact path="/edit" element={<EditEmployees />}></Route> */}
+          </Routes>
+        </Router>
+      </Box>
     </div>
   );
 }

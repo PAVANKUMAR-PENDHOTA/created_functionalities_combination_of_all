@@ -2,14 +2,14 @@
 import actionTypes from "../constants/actionTypes";
 
 const usersLoadStart = () =>({
-    type: actionTypes.USERS_LOAD_START,
+    type: actionTypes.EMPLOYEE_LOAD_START,
 });
-const usersLoadSuccess = (users) => ({
-	type: actionTypes.USERS_LOAD_SUCCESS,
-	payload: users,
+const usersLoadSuccess = (employee) => ({
+	type: actionTypes.EMPLOYEE_LOAD_SUCCESS,
+	payload: employee,
 });
 const usersLoadError = (errorMessage) => ({
-	type: actionTypes.USERS_LOAD_ERROR,
+	type: actionTypes.EMPLOYEE_LOAD_ERROR,
 	payload: errorMessage,
 });
 
