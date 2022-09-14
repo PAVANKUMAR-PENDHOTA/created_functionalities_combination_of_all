@@ -3,9 +3,14 @@ import React,{useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 // import axios from "axios";
 
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+
+import TextField from '@mui/material/TextField';
+
 
 const AddEmployees = () => {
-    const [name , setName] = useState("");
+    const [name, setName] = useState("");
     const [organisation, setOrganisation] = useState("");
     const [designation, setDesignation] = useState("");
     const [age, setAge] = useState("");
@@ -28,9 +33,33 @@ const AddEmployees = () => {
     }
   return (
     <div>
-      <h3>Add Employee</h3>
+      <Box
+      sx={{
+        width: 500,
+        maxWidth: '100%',
+      }}
+    >
+       <Typography variant="h3" gutterBottom component="div">
+       Add Employee
+      </Typography>
+
+      <Box
+      component="form"
+      sx={{
+        '& > :not(style)': { m: 1, width: '25ch' },
+      }}
+      noValidate
+      autoComplete="off"
+    >
+      <TextField fullWidth label="fullWidth" id="fullWidth" />
+    
+    </Box>
+
+      
+    </Box>
+
       <form onSubmit={ submitHandler }>
-        <input type='text' placeholder='Enter Name' value={ name }
+        <input type='text' placeholder='name' value={ name }
                         onChange={ (e) => setName(e.target.value) }/>
         <input type='text' placeholder='organisation' value={ organisation }
                         onChange={ (e) => setOrganisation(e.target.value) }/>

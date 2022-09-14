@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React,{useEffect} from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { loadUsersAsync } from '../redux/modules/reducers/thunk';
+import { loadUsersAsync,asyncDeleteEmployee } from '../redux/modules/reducers/thunk';
 // import { useNavigate } from 'react-router-dom';
 
 import { styled } from '@mui/material/styles';
@@ -21,19 +21,22 @@ import { pink } from '@mui/material/colors';
 
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import axios from 'axios';
-import { getAllUsers } from '../redux/api/users';
-import { Link } from 'react-router-dom';
-
+// import axios from 'axios';
+// import { getAllUsers } from '../redux/api/users';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Employees = () => {
+
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
   const { isLoading, employee, errorMessage } = useSelector(
     (state) => state.employee
   );
 //   console.log(employee);
   useEffect(() => {
     dispatch(loadUsersAsync());
+    //dispatch(loadUsersAsync1())
   }, []);
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -59,21 +62,27 @@ const Employees = () => {
 
 const deleteHandler = async(id) =>{
 
-    if(
-        window.confirm("Are you sure that you wanted to delete the Employee record")
-    ){
-        const response = await axios.delete(`http://localhost:4000/employee/${id}`);
-        if(response.status === 200){
-            alert(response.data);
-            getAllUsers();
-        }
-    }
+    // if(
+    //     window.confirm("Are you sure that you wanted to delete the Employee record")
+    // ){
+    //     const response = await axios.delete(`http://localhost:4000/employee/${id}`);
+    //     if(response.status === 200){
+    //         alert(response.data);
+    //         // {employee && employee}
+    //         window.location.reload(false);
+    //     }
+    // }
+    dispatch(asyncDeleteEmployee(id));
+    dispatch(loadUsersAsync())
+    // setTimeout(()=>{
+      // dispatch(loadUsersAsync());
+      // window.location.reload(false);
+    // },100)
+
+
     
 }
 
-// const Update = (id) =>{
-//     console.log(id);
-// }
 
   return (
     <div>
@@ -81,22 +90,18 @@ const deleteHandler = async(id) =>{
       {isLoading && <h4>Loading...</h4>}
        
 
-      {errorMessage && <h3>{errorMessage}</h3>}
-
-      {/* <Box sx={{ width: '100%', maxWidth: 500 , }}>
-      
-      </Box> */}
+      {errorMessage && <h3 style={{color:'red'}}>{errorMessage}</h3>}
 
       <Stack direction="row" alignItems="center" mb="10px" spacing={2}>
-      <Button variant="contained" component="label" m="2" sx={{marginLeft:"90%"}}>
+      <Button variant="contained" component="label" m="2" onClick={()=>navigate('addedit')} sx={{marginLeft:"90%"}}>
         Add Employee
       </Button>
       </Stack>
 
       <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
+        <TableHead >
+          <TableRow >
             <StyledTableCell>ID</StyledTableCell>
             <StyledTableCell align="right">NAME</StyledTableCell>
             <StyledTableCell align="right">ORGANISATION</StyledTableCell>
