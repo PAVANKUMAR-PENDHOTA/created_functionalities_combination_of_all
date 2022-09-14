@@ -17,7 +17,6 @@ const deleteEmployeeRequest = (id) => ({
   type: actionTypes.DELETE_EMPLOYEE_REQUEST,
   payload: id,
 });
-
 const deleteEmployeeSuccess = (payload) => ({
   type: actionTypes.EMPLOYEE_DELETE_SUCCESS,
   payload: payload,
@@ -42,9 +41,10 @@ const employeePostError =(errorMessage)=>({
     payload: errorMessage,
 });
 
-const employeeEditStart = (payload)=>({
+const employeeEditStart = (id, state)=>({
     type: actionTypes.EMPLOYEE_EDIT_START,
-    payload: payload,
+    id: id,
+    state: state
 });
 
 const employeeEditSuccess = (payload)=>({

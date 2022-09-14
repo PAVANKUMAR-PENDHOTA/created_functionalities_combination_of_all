@@ -9,10 +9,10 @@ export const getAllUsers = async() =>{
     return await axios({
         method: "GET",
         url: `${base_url}/employee`,
-        // responseType: "json",
-        // headers: {
-        //     "content-type": "application/json",
-        // },
+        responseType: "json",
+        headers: {
+            "content-type": "application/json",
+        },
     });
 };  
 
@@ -48,38 +48,20 @@ export const postEmployee = async (payload) =>{
         }).then((res) => {
             console.log(res)
         }).catch(e => console.log(e))
-    // const base_url = "http://localhost:4000";
-
-    // return await axios ({
-    //     method: "POST",
-    //     url: (`${base_url}/insert`,{
-    //         name: name,
-    //         organisation: organisation,
-    //         designation: designation,
-    //         age: age,
-    //         city: city,
-    //         pincode: pincode,
-            
-    //     }),
-    //     responseType: "json",
-    //     headers: {
-    //             "content-type": "application/json",
-    //         },
-    // })
 };
     
-export const editEmployee = async(id) =>{
-    console.log({id})
+export const editEmployee = async(id, state) =>{
+    console.log({id, state})
     const url = `http://localhost:4000/update/${id}`
     const data = {
-        name: name,
-        organisation: organisation,
-        designation: designation,
-        age: age,
-        city: city,
-        pincode: pincode,
+            name: state.name,
+            organisation: state.organisation,
+            designation: state.designation,
+            age: state.age,
+            city: state.city,
+            pincode: state.pincode
     }
-    await axios ({
+    return await axios ({
         method: "PUT",
         url: url,
         data: data,

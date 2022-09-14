@@ -2,7 +2,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import {
-  // Link,
   useNavigate,
   useParams,
 } from "react-router-dom";
@@ -11,9 +10,10 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
 import TextField from "@mui/material/TextField";
-import { 
-  // asyncEditEmployee,
-   asyncPostEmployee } from "../redux/modules/reducers/thunk";
+import {
+  asyncEditEmployee,
+  asyncPostEmployee,
+} from "../redux/modules/reducers/thunk";
 
 const initialState = {
   name: "",
@@ -59,27 +59,9 @@ const AddEdit = () => {
     } else {
       if (!id) {
         dispatch(asyncPostEmployee(state));
-        console.log(state);
-        
-      } else 
-      {
-        console.log('else')
-        await axios({
-          method: "PUT",
-          url: `http://localhost:4000/update/${id}`,
-          data: state,
-          headers: {
-            "Content-type": "application/json",
-          },
-        })
-          .then((res) => console.log(res))
-          .catch((e) => console.log(e));
-        window.confirm("Contact Updated Successfully");
-      }
+      } else dispatch(asyncEditEmployee(id, state));
       setTimeout(() => navigate("/"), 500);
-      // dispatch(asyncEditEmployee());
-      // setTimeout(() => navigate("/"), 500);
-    };
+    }
   };
 
   return (

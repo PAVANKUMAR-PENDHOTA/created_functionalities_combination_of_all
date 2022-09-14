@@ -1,7 +1,5 @@
 import { deleteEmployee, getAllUsers, postEmployee, editEmployee } from "../../api/users";
 import actions from "../../actions/actions";
-// import { response } from "express";
-// import { response } from "express";
 
 export const loadUsersAsync = () => (dispatch) => {
   dispatch(actions.usersLoadStart());
@@ -27,10 +25,10 @@ export const asyncPostEmployee = (payload) =>(dispatch)=>{
 
 }
 
-export const asyncEditEmployee = (payload) => (dispatch) =>{
-  console.log(payload);
-  dispatch(actions.employeeEditStart(payload));
-  editEmployee(payload)
+export const asyncEditEmployee = (id, state) => (dispatch) =>{
+  console.log(id, state);
+  dispatch(actions.employeeEditStart());
+  editEmployee(id, state)
       .then((response)=>dispatch(actions.employeeEditSuccess(response)))
       .catch((error)=>dispatch(actions.employeeEditError(error)))
 }
