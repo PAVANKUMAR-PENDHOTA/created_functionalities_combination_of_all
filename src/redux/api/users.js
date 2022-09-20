@@ -75,10 +75,35 @@ export const editEmployee = async(id, state) =>{
 }
 
 
+// https://jsonplaceholder.typicode.com/photos
 
+export const getPhotos = async() =>{
+    const base_url = "https://jsonplaceholder.typicode.com/albums/1"
+    // const base_url = "http://localhost:4000"
+    
+    return await axios({
+        method: "GET",
+        url: `${base_url}/photos`,
+        responseType: "json",
+        headers: {
+            "content-type": "application/json",
+        },
+    });
+};
 
-
-
+export const fetchPosts = async() =>{
+    // const base_url = "https://jsonplaceholder.typicode.com"
+    const base_url = "https://jsonplaceholder.typicode.com"
+    
+    return await axios({
+        method: "GET",
+        url: `${base_url}/posts`,
+        responseType: "json",
+        headers: {
+            "content-type": "application/json",
+        },
+    });
+}; 
 
 
 

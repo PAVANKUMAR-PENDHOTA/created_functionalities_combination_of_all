@@ -4,7 +4,10 @@ const initialState = {
     isLoading: false,
     employee: null,
     errorMessage: null,
-    singleEmployee: null,
+    photos: null,
+    posts: [],
+	searchResults: [],
+	page: 1,
 }
 
 const employeeReducer = (state = initialState, {type , payload}) => {
@@ -82,8 +85,65 @@ const employeeReducer = (state = initialState, {type , payload}) => {
                                 errorMessage: payload,
 
                             };
-                    default:
-                        return state;
+                            case actionTypes.PHOTOS_LOAD_START:
+                                return{
+                                    ...state,
+                                    isLoading: true,
+                                    photos: null,
+                                    errorMessage: null,
+                                };
+                                case actionTypes.PHOTOS_LOAD_SUCCESS:
+                                    return{
+                                        ...state,
+                                        isLoading:false,
+                                        photos:payload,
+                                        errorMessage:null,
+                                    };
+                                    case actionTypes.PHOTOS_LOAD_ERROR:
+                                        return{
+                                            ...state,
+                                            isLoading:false,
+                                            errorMessage: payload,
+                                        };
+
+                                        case actionTypes.FETCH_POST_REQUEST:
+                                            return {
+                                                ...state,
+                                                isLoading: true,
+                                            };
+                                        case actionTypes.FETCH_POST_SUCCESS:
+                                            return {
+                                                ...state,
+                                                isLoading: false,
+                                                posts: payload,
+                                                searchResults: payload,
+                                            };
+                                        case actionTypes.FETCH_POST_FAILED:
+                                            return {
+                                                ...state,
+                                                isLoading: false,
+                                                errorMessage: payload,
+                                            };
+                                        case actionTypes.SORT_POSTS_ASC:
+                                           const sortAsc = type.payload.sort((a, b) => (a.title < b.title ? 1 : a.title > b.title ? -1 : 0));
+                                            return {
+                                                ...state,
+                                                posts: sortAsc,
+                                            };
+                                        case actionTypes.SORT_POSTS_DESC:
+                                            const sortDesc = type.payload.sort((a, b) => (a.title < b.title ? -1 : a.title > b.title ? 1 : 0));
+                                            return {
+                                                ...state,
+                                                posts: sortDesc,
+                                            };
+                                        case actionTypes.SEARCH_POSTS:
+                                            return {
+                                                ...state,
+                                                posts: type.payload,    
+                                                page: 1
+                                            };
+                                     default:
+                                         return state;
     }
 };
 export default employeeReducer;

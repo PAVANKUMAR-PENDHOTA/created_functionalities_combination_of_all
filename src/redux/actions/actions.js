@@ -54,7 +54,51 @@ const employeeEditSuccess = (payload)=>({
 const employeeEditError =(errorMessage)=>({
     type:actionTypes.EMPLOYEE_EDIT_ERROR,
     payload: errorMessage, 
+});
+
+const usersPhotosStart = () => ({
+  type: actionTypes.PHOTOS_LOAD_START,
+});
+const usersPhotosSuccess = (employee) => ({
+  type: actionTypes.PHOTOS_LOAD_SUCCESS,
+  payload: employee,
+});
+const usersPhotosError = (errorMessage) => ({
+  type: actionTypes.PHOTOS_LOAD_ERROR,
+  payload: errorMessage,
+});
+
+
+const postsFetchStart = () =>({
+  type:actionTypes.FETCH_POST_REQUEST, 
+});
+const postsFetchSuccess = (posts)=>({
+  type: actionTypes.FETCH_POST_SUCCESS,
+  payload: posts,
+});
+const postsFetchError =(errorMessage)=>({
+  type: actionTypes.FETCH_POST_FAILED,
+  payload: errorMessage,
+});
+
+// const sortPostsAsc = (dispatch getState)=>({
+//   const { employeeReducer } = getState();
+//   dispatch({ type: actions.SORT_POSTS_ASC, payload: employeeReducer.posts });
+// });
+const sortPostsAsc = (posts)=>({
+  type:actionTypes.SORT_POSTS_ASC,
+  payload: posts
+});
+const sortPostsDesc = (posts)=>({
+  type:actionTypes.SORT_POSTS_DESC,
+  payload: posts,
+});
+
+const searchPosts =(posts)=>({
+  type:actionTypes.SEARCH_POSTS,
+  payload: posts
 })
+
 
 export default {
   usersLoadStart,
@@ -71,5 +115,18 @@ export default {
 
   employeeEditStart,
   employeeEditSuccess,
-  employeeEditError
+  employeeEditError,
+
+  usersPhotosStart,
+  usersPhotosSuccess,
+  usersPhotosError,
+
+  postsFetchStart,
+  postsFetchSuccess,
+  postsFetchError,
+
+  sortPostsAsc,
+  sortPostsDesc,
+
+  searchPosts
 };
