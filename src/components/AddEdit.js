@@ -36,7 +36,7 @@ const AddEdit = () => {
   const { id } = useParams();
 
   const goBack = () => {
-    navigate("/");
+    navigate("/home");
   };
 
   useEffect(() => {

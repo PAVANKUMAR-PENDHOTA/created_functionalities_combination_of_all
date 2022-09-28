@@ -81,6 +81,23 @@ const Employees = () => {
 
   return (
     <div>
+       <Stack
+            direction="row"
+            mb="10px"
+            spacing={2}
+            component="h2"
+            sx={{ textDecoration: "none" }}
+          >
+            
+            <Link to="/home">Home</Link>
+            <Link to="/addedit">Add</Link>
+            <Link to="/photos">Gallery</Link>
+            <Link to="/outlet">Profile</Link>
+            <Link to="/posts">Posts</Link>
+            <Link to="/sidebar">Sidebar</Link>
+            <Link to="/">Logout</Link>
+          </Stack>
+
       {isLoading && <h4>Loading...</h4>}
 
       {errorMessage && <h3 style={{ color: "red" }}>{errorMessage}</h3>}
@@ -90,7 +107,7 @@ const Employees = () => {
           variant="contained"
           component="label"
           m="2"
-          onClick={() => navigate("addedit")}
+          onClick={() => navigate("/addedit")}
           sx={{ marginLeft: "90%" }}
         >
           Add Employee

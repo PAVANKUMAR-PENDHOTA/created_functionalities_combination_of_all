@@ -20,6 +20,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from '@mui/material/Paper';
+import Stack from "@mui/material/Stack";
+import { Link } from "react-router-dom";
 
 const Photos = () => {
   const dispatch = useDispatch();
@@ -44,7 +46,24 @@ const Photos = () => {
 //   const result = text.slice(0 , 8)
   return (
     <div>
-      <h1>Hello world</h1>
+
+<Stack
+            direction="row"
+            mb="10px"
+            spacing={2}
+            component="h2"
+            sx={{ textDecoration: "none" }}
+          >
+            
+            <Link to="/home">Home</Link>
+            <Link to="/addedit">Add</Link>
+            <Link to="/photos">Gallery</Link>
+            <Link to="/outlet">Profile</Link>
+            <Link to="/posts">Posts</Link>
+            <Link to="/">Logout</Link>
+          </Stack>
+
+      <h1 style={{ color: "green",textAlign:"center", marginButtom:'50px',}}>Photo Gallery</h1>
 
       {isLoading && <h4>Loading...</h4>}
 
@@ -58,12 +77,11 @@ const Photos = () => {
 
       <Container >
         
-          <Grid item xs={12} container direction="row" justify="center">
+          <Grid item xs={12} sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gridGap: '20px',}} >
             {photos &&
               photos.map((row, index) => (
                 <Card  
-                sx={{
-                    maxWidth: 345, display: 'flex', flexDirection: 'column' }} key={index + 1}
+                 key={index + 1}
                     >
                  
                   <CardMedia

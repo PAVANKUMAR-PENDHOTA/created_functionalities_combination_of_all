@@ -1,0 +1,23 @@
+input[type=file] {
+/* width: 80%; */
+padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  height: 100px;
+  text-align: center;
+  /* display: block; */
+}
+
+label {
+    left: 0;
+    /* position: initial; */
+}
+input[type=submit]{
+    background-color: #1877f2;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
